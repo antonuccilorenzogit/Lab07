@@ -17,32 +17,33 @@ class Model:
     def get_artefatti_filtrati(self, museo:str, epoca:str):
         """Restituisce la lista di tutti gli artefatti filtrati per museo e/o epoca (filtri opzionali)."""
         if epoca == 'Nessun filtro' and museo == 'Nessun filtro':
-            lista_artefatti = self._artefatto_dao.get_artefatto()
-            return lista_artefatti
+            lista_artefatti1 = self._artefatto_dao.get_artefatto()
+            return lista_artefatti1
 
         elif epoca == 'Nessun filtro' and museo != 'Nessun filtro':
-            artefatti_filtrati= []
-            lista_artefatti= self._artefatto_dao.get_artefatto()
-            for artefatto in lista_artefatti:
-                if artefatto.id_museo == museo:
-                    artefatti_filtrati.append(artefatto)
-            return artefatti_filtrati
+            artefatti_filtrati2= []
+            lista_artefatti2= self._artefatto_dao.get_artefatto()
+            for artefatto in lista_artefatti2:
+                if str(artefatto.id_museo) == str(museo):
+                    artefatti_filtrati2.append(artefatto)
+            return artefatti_filtrati2
 
         elif museo == 'Nessun filtro' and epoca != 'Nessun filtro':
-            artefatti_filtrati = []
-            lista_artefatti = self._artefatto_dao.get_artefatto()
-            for artefatto in lista_artefatti:
+            artefatti_filtrati3 = []
+            lista_artefatti3 = self._artefatto_dao.get_artefatto()
+
+            for artefatto in lista_artefatti3:
                 if artefatto.epoca == epoca:
-                    artefatti_filtrati.append(artefatto)
-            return artefatti_filtrati
+                    artefatti_filtrati3.append(artefatto)
+            return artefatti_filtrati3
 
         else:
-            artefatti_filtrati = []
-            lista_artefatti = self._artefatto_dao.get_artefatto()
-            for artefatto in lista_artefatti:
-                if artefatto.epoca == epoca and artefatto.id_museo == museo:
-                    artefatti_filtrati.append(artefatto)
-            return artefatti_filtrati
+            artefatti_filtrati4 = []
+            lista_artefatti4 = self._artefatto_dao.get_artefatto()
+            for artefatto in lista_artefatti4:
+                if artefatto.epoca == epoca and str(artefatto.id_museo) == str(museo):
+                    artefatti_filtrati4.append(artefatto)
+            return artefatti_filtrati4
 
 
 
