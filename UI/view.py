@@ -1,6 +1,7 @@
 import flet as ft
+from flet.core.dropdown import Dropdown
+from flet.core.types import MainAxisAlignment
 from UI.alert import AlertManager
-
 '''
     VIEW:
     - Rappresenta l'interfaccia utente
@@ -36,10 +37,23 @@ class View:
         self.txt_titolo = ft.Text(value="Musei di Torino", size=38, weight=ft.FontWeight.BOLD)
 
         # --- Sezione 2: Filtraggio ---
-        # TODO
+        self._dd_musei= ft.Dropdown(label="Museo",
+                                    width= 300,
+                                    )
+
+        self._dd_epoca = ft.Dropdown(label="Epoca",
+                                     width=200)
+        self.controller.popola_musei()
+        self.controller.popola_epoca()
+
+
+
 
         # Sezione 3: Artefatti
-        # TODO
+        self._artefatti_list=ft.ListView(controls=(), padding= 10, auto_scroll=True)
+        artefatti_button= ft.ElevatedButton(text= 'Mostra Artefatti',
+                                            width= 200,
+                                            on_click= self.controller.handler_artefatti_button)
 
         # --- Toggle Tema ---
         self.toggle_cambia_tema = ft.Switch(label="Tema scuro", value=True, on_change=self.cambia_tema)
@@ -53,10 +67,13 @@ class View:
             ft.Divider(),
 
             # Sezione 2: Filtraggio
-            # TODO
+            ft.Row(controls=[self._dd_musei,self._dd_epoca]
+                   ,alignment= MainAxisAlignment.CENTER),
+            ft.Divider(),
 
             # Sezione 3: Artefatti
-            # TODO
+            artefatti_button,
+            self._artefatti_list,
         )
 
         self.page.scroll = "adaptive"
